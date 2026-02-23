@@ -13,13 +13,21 @@ class Node {
 class Solution {
     Node reverseList(Node head) {
         // code here
-        Node curr=head,next=null,prev=null;
-        while(curr!=null){
-            prev=curr.next;
-            curr.next=next;
-            next=curr;
-            curr=prev;
+        Stack<Node> st=new Stack<>();
+        Node temp=head;
+        while(temp!=null){
+            st.push(temp);
+            temp=temp.next;
         }
-        return next;
+        if(!st.isEmpty()){
+            head=st.pop();
+            temp=head;
+            while(!st.isEmpty()){
+                temp.next=st.pop();
+                temp=temp.next;
+            }
+            temp.next=null;
+        }
+        return head;
     }
 }
